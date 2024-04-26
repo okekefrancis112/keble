@@ -35,21 +35,21 @@ jobs:
     #           REDIS_URL=${{ secrets.REDIS_URL }}
     #           EOF
 
-    #   - name: Run Trivy vulnerability scanner
-    #     if: github.ref == 'refs/heads/test-pull-request'
-    #     uses: aquasecurity/trivy-action@master
-    #     with:
-    #       scan-type: 'repo'
-    #       scan-ref: .
-    #       format: 'table'
-    #       exit-code: '1'
-    #       ignore-unfixed: true
-    #       vuln-type: '*'
-    #       severity: 'CRITICAL,HIGH'
+      - name: Run Trivy vulnerability scanner
+        if: github.ref == 'refs/heads/test-pull-request'
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'repo'
+          scan-ref: .
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: '*'
+          severity: 'CRITICAL,HIGH'
 
       - name: Login to DockerHub
         if: github.event.pull_request.base.ref == 'main'
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_PASS }}
@@ -60,7 +60,7 @@ jobs:
 
       - name: Build image and push to Docker Hub
         if: github.event.pull_request.base.ref == 'main'
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           # relative path to the place where source code with Dockerfile is located
           context: .
