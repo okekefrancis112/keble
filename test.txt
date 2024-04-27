@@ -1,3 +1,1 @@
-testing my github actions
-testing my pull request path now.
-edit something
+let's make magic
