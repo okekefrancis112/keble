@@ -51,6 +51,6 @@ jobs:
           context: .
           # Note: tags has to be all lower-case
           tags: |
-             billions119/enet:${{ steps.version.outputs.date }}
+             billion119/enet:${{ steps.version.outputs.date }}
           # build on feature branches, push only on main branch
           push: ${{ github.event.pull_request.base.ref == 'main' }}
